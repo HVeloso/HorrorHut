@@ -17,12 +17,8 @@ public static class CamerasManager
 
         CurrentCamera = newCam;
 
-        try
-        {
-            cameras[1].SetActive(false);
-            CurrentCamera.SetActive(true);
-        }
-        catch (Exception) { }
+        cameras[1].SetActive(false);
+        CurrentCamera.SetActive(true);
     }
 
     public static void RemoveCamera(GameObject camera)
@@ -30,7 +26,7 @@ public static class CamerasManager
         if (camera == cameras[0])
         {
             CurrentCamera = cameras[1];
-            
+
             cameras[0].SetActive(false);
             CurrentCamera.SetActive(true);
         }

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AreaCamera : MonoBehaviour
+[RequireComponent(typeof(Collider))]
+public class CameraRegionTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
