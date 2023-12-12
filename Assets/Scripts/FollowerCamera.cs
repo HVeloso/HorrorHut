@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class FollowerCamera : MonoBehaviour
 {
+    #region Properties
+
     [Header("Follow Axis")]
     [SerializeField] private bool followXAxis;
     [SerializeField] private bool followYAxis;
@@ -14,6 +16,19 @@ public class FollowerCamera : MonoBehaviour
     [SerializeField] private float distanceFromXAxis;
     [SerializeField] private float distanceFromYAxis;
     [SerializeField] private float distanceFromZAxis;
+    
+    [Header("Axis Position Limiter (World Position)")]
+    [Header("Minimum Limit")]
+    [SerializeField] private float minimumXLimit;
+    [SerializeField] private float minimumYLimit;
+    [SerializeField] private float minimumZLimit;
+
+    [Header("Maximum Limit")]
+    [SerializeField] private float maximumXLimit;
+    [SerializeField] private float maximumYLimit;
+    [SerializeField] private float maximumZLimit;
+
+    #endregion
 
     private Transform playerTransform;
     private Vector3 newPosition;
@@ -23,15 +38,29 @@ public class FollowerCamera : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
-        {
-            newPosition.x = followXAxis ? distanceFromXAxis + playerTransform.position.x : transform.position.x;
-            newPosition.y = followYAxis ? distanceFromYAxis + playerTransform.position.y : transform.position.y;
-            newPosition.z = followZAxis ? distanceFromZAxis + playerTransform.position.z : transform.position.z;
+        newPosition.x = followXAxis ? distanceFromXAxis + playerTransform.position.x : transform.position.x;
+        newPosition.y = followYAxis ? distanceFromYAxis + playerTransform.position.y : transform.position.y;
+        newPosition.z = followZAxis ? distanceFromZAxis + playerTransform.position.z : transform.position.z;
 
-            transform.position = newPosition;
-        }
+        if (minimumXLimit != 0 && maximumXLimit != 0)
+            newPosition.x = Mathf.Clamp(newPosition.x, minimumXLimit, maximumXLimit);
+
+        if (minimumYLimit != 0 && maximumYLimit != 0)
+            newPosition.y = Mathf.Clamp(newPosition.y, minimumYLimit, maximumYLimit);
+
+        if (minimumZLimit != 0 && maximumZLimit != 0)
+            newPosition.z = Mathf.Clamp(newPosition.z, minimumZLimit, maximumZLimit);
+
+        transform.position = newPosition;
     }
+
+    #if UNITY_EDITOR
+        [ContextMenu(nameof(GetCameraWorldPosition))]
+        private void GetCameraWorldPosition()
+        {
+            Debug.Log($"X: {transform.position.x} | Y: {transform.position.y} | Z: {transform.position.z}");
+        }
+    #endif
 }

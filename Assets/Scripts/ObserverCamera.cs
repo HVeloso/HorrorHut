@@ -22,10 +22,8 @@ public class ObserverCamera : MonoBehaviour
 
     private void Update()
     {
-        positionToLook.x = followXAxis ? playerTransform.position.x : refPos.x;
-        positionToLook.y = followYAxis ? playerTransform.position.y : refPos.y;
-        positionToLook.z = followZAxis ? playerTransform.position.z : refPos.z;
 
-        transform.LookAt(positionToLook);
+
+        transform.LookAt(playerTransform);
     }
 }

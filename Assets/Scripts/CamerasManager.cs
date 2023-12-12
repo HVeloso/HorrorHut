@@ -17,7 +17,7 @@ public static class CamerasManager
 
         CurrentCamera = newCam;
 
-        cameras[1].SetActive(false);
+        if (cameras.Count > 1) cameras[1].SetActive(false);
         CurrentCamera.SetActive(true);
     }
 
