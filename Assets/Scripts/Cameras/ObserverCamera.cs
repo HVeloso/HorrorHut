@@ -58,18 +58,24 @@ public class ObserverCamera : MonoBehaviour
 
     private float ClampRotation(float value, float minimum, float maximum)
     {
+        float centralOppositeValue;
+
         if (minimum < maximum)
         {
+            centralOppositeValue = (minimum + maximum) / 2 + 180;
+            if (centralOppositeValue > 360) centralOppositeValue -= 360;
+
             if (value < minimum) value = minimum;
             else if (value > maximum) value = maximum;
         }
         else
         {
-            float centralOppositeValue = (minimum + maximum) / 2;
+            centralOppositeValue = (minimum + maximum) / 2;
+
             if (value < minimum && value > centralOppositeValue) value = minimum;
             else if (value > maximum && value < centralOppositeValue) value = maximum;
         }
-        
+
         return value;
     }
 
