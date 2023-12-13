@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
@@ -16,7 +17,7 @@ public class FollowerCamera : MonoBehaviour
     [SerializeField] private float distanceFromXAxis;
     [SerializeField] private float distanceFromYAxis;
     [SerializeField] private float distanceFromZAxis;
-    
+
     [Header("Axis Position Limiter (World Position)")]
     [Header("Minimum Limit")]
     [SerializeField] private float minimumXLimit;
@@ -56,11 +57,19 @@ public class FollowerCamera : MonoBehaviour
         transform.position = newPosition;
     }
 
-    #if UNITY_EDITOR
-        [ContextMenu(nameof(GetCameraWorldPosition))]
-        private void GetCameraWorldPosition()
-        {
-            Debug.Log($"X: {transform.position.x} | Y: {transform.position.y} | Z: {transform.position.z}");
-        }
-    #endif
+#if UNITY_EDITOR
+    [ContextMenu(nameof(GetCameraWorldPosition))]
+    private void GetCameraWorldPosition()
+    {
+        Debug.Log($"Positions: X: {transform.position.x} | Y: {transform.position.y} | Z: {transform.position.z}");
+    }
+
+    [ContextMenu(nameof(GetDistanceFromPlayer))]
+    private void GetDistanceFromPlayer()
+    {
+        Vector3 distanceFormPlayer = transform.position - playerTransform.position;
+
+        Debug.Log($"Distances: X: {distanceFormPlayer.x} | Y: {distanceFormPlayer.y} | Z: {distanceFormPlayer.z}");
+    }
+#endif
 }
