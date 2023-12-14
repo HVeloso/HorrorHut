@@ -13,6 +13,9 @@ public class FollowerCamera : MonoBehaviour
     [SerializeField] private bool followYAxis;
     [SerializeField] private bool followZAxis;
 
+    [Header("Motion Delay")]
+    [SerializeField] [Range(0f, 20f)] private float delayIntensity;
+
     [Header("Axis Distance")]
     [SerializeField] private float distanceFromXAxis;
     [SerializeField] private float distanceFromYAxis;
@@ -33,6 +36,7 @@ public class FollowerCamera : MonoBehaviour
 
     private Transform playerTransform;
     private Vector3 newPosition;
+    private const float speed = 20f;
 
     private void Awake()
     {
@@ -54,7 +58,7 @@ public class FollowerCamera : MonoBehaviour
         if (minimumZLimit != 0 && maximumZLimit != 0)
             newPosition.z = Mathf.Clamp(newPosition.z, minimumZLimit, maximumZLimit);
 
-        transform.position = newPosition;
+        transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * (speed - delayIntensity));
     }
 
 #if UNITY_EDITOR

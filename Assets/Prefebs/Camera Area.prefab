@@ -130,8 +130,6 @@ GameObject:
   - component: {fileID: 4481010336656622401}
   - component: {fileID: 5799225889143410188}
   - component: {fileID: 3832960275286702947}
-  - component: {fileID: 8768801709845774246}
-  - component: {fileID: 1438497789617855904}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -213,48 +211,3 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7933990675533762938}
   m_Enabled: 1
---- !u!114 &8768801709845774246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7933990675533762938}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ae355d3383463459599eefa0e8d879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followXAxis: 0
-  followYAxis: 0
-  followZAxis: 0
-  distanceFromXAxis: 0
-  distanceFromYAxis: 0
-  distanceFromZAxis: 0
-  minimumXLimit: 0
-  minimumYLimit: 0
-  minimumZLimit: 0
-  maximumXLimit: 0
-  maximumYLimit: 0
-  maximumZLimit: 0
---- !u!114 &1438497789617855904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7933990675533762938}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3413afbef96f3164e9b53487203c0661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followXAxis: 0
-  followYAxis: 0
-  followZAxis: 0
-  minimumXLimit: 0
-  minimumYLimit: 0
-  minimumZLimit: 0
-  maximumXLimit: 0
-  maximumYLimit: 0
-  maximumZLimit: 0

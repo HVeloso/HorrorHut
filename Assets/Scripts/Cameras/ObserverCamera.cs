@@ -13,6 +13,9 @@ public class ObserverCamera : MonoBehaviour
     [SerializeField] private bool followYAxis;
     [SerializeField] private bool followZAxis;
 
+    [Header("Rotate Delay")]
+    [SerializeField] [Range(0f, 20f)] private float delayIntensity;
+
     [Header("Axis Rotation Limiter (World Rotation)")]
     [Header("Minimum Limit")]
     [SerializeField] private float minimumXLimit;
@@ -29,11 +32,13 @@ public class ObserverCamera : MonoBehaviour
     private Transform playerTransform;
     private Transform referenceTransform;
     private Vector3 newAngles;
-
+    private const float speed = 20f;
+    
     private void Awake()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        referenceTransform = Instantiate(new GameObject("Reference"), transform).transform;
+        referenceTransform = new GameObject("Reference").transform;
+        referenceTransform.SetParent(transform, false);
     }
 
     private void LateUpdate()
@@ -52,8 +57,8 @@ public class ObserverCamera : MonoBehaviour
 
         if (minimumZLimit != 0 && maximumZLimit != 0)
             newAngles.z = ClampRotation(newAngles.z, minimumZLimit, maximumZLimit);
-
-        transform.eulerAngles = newAngles;
+        
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newAngles), Time.deltaTime * (speed - delayIntensity));
     }
 
     private float ClampRotation(float value, float minimum, float maximum)
