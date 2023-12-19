@@ -58,7 +58,7 @@ public class ObserverCamera : MonoBehaviour
         if (minimumZLimit != 0 && maximumZLimit != 0)
             newAngles.z = ClampRotation(newAngles.z, minimumZLimit, maximumZLimit);
         
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newAngles), Time.deltaTime * (speed - delayIntensity));
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(newAngles), Time.deltaTime * (speed - delayIntensity));
     }
 
     private float ClampRotation(float value, float minimum, float maximum)
