@@ -25,21 +25,12 @@
                 },
                 {
                     "name": "HoldBreath",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "f095f496-37ba-4992-bf7f-6e81ae7fff60",
-                    "expectedControlType": "Integer",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Guard",
-                    "type": "Value",
-                    "id": "b93fbde4-17b7-46fe-aec9-f45953938023",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "OpenInventory",
@@ -246,17 +237,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a3cc454d-f769-4453-bb75-69ef2040ad39",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "FastTurn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f7925074-1ee7-4491-b3c8-3cef79cc45b8",
                     "path": "<Keyboard>/c",
                     "interactions": "",
@@ -268,12 +248,12 @@
                 },
                 {
                     "name": "",
-                    "id": "78b7750b-85fb-4d40-a13e-3feb4b7fc8a8",
-                    "path": "<Keyboard>/space",
+                    "id": "61419c17-23dc-42b3-a03e-18e97016c1a0",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Guard",
+                    "action": "HoldBreath",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -318,6 +298,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e8fbadf-c659-4a3a-ab2b-c7196fcbb4d4",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FastTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "14dbbbc8-ddd5-46d3-a291-4eef9a9d97b2",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FastTurn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
