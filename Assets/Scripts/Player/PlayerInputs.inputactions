@@ -257,6 +257,17 @@
                 },
                 {
                     "name": "",
+                    "id": "eac6c033-ed83-4e85-a55f-c9c0e0ff5218",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FastTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f7925074-1ee7-4491-b3c8-3cef79cc45b8",
                     "path": "<Keyboard>/c",
                     "interactions": "",

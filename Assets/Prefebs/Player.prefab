@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7098176723931000560}
   - component: {fileID: 4711960099931707752}
   - component: {fileID: 2018637664204088540}
-  - component: {fileID: 5290232642772224979}
   - component: {fileID: 5385697494794954713}
+  - component: {fileID: 5290232642772224979}
+  - component: {fileID: 7172657222057306199}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -113,24 +114,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5290232642772224979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501818625353689048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b2bad68436e43840a0bbfc7dfa6f8f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fowardSpeed: 5
-  limitSpeed: 15
-  rotateSpeed: 150
-  rotateRate: 0.5
-  acelleration: 5
-  currentSpeed: 0
 --- !u!114 &5385697494794954713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +144,38 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerInputs
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5290232642772224979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501818625353689048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2bad68436e43840a0bbfc7dfa6f8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 5
+  maxSpeed: 10
+  acceleration: 2.5
+  timeToStartAccelerate: 2
+  rotateSpeed: 150
+  rateOfRotationWhileWalking: 0.65
+--- !u!114 &7172657222057306199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501818625353689048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91fd44093ce2d640a80c5ba68d6c12e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationDuration: 0.2
+  fastTurnCooldown: 0.2
 --- !u!1 &2374567015019330560
 GameObject:
   m_ObjectHideFlags: 0

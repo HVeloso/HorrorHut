@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18154654, g: 0.22718707, b: 0.30740517, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154657, g: 0.2271872, b: 0.3074054, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1039,7 +1039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1154637087
 Transform:
   m_ObjectHideFlags: 0
@@ -1178,7 +1178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1205429646
 Transform:
   m_ObjectHideFlags: 0
@@ -1569,14 +1569,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5290232642772224979, guid: 2a2b4e9295bbc4544aa64c926d82f2c9, type: 3}
-      propertyPath: limitSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290232642772224979, guid: 2a2b4e9295bbc4544aa64c926d82f2c9, type: 3}
-      propertyPath: rotateRate
-      value: 0.65
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1818,8 +1810,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116007995}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.45137832, y: -0.0008052194, z: 0.00040760686, w: -0.89233226}
-  m_LocalPosition: {x: 1.6770155, y: 25.110886, z: -28.927124}
+  m_LocalRotation: {x: 0.14119306, y: -0.05639662, z: 0.008056822, w: 0.98834157}
+  m_LocalPosition: {x: 16.091494, y: 7.9819603, z: -29.715637}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

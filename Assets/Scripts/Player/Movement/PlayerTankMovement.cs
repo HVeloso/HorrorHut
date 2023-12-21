@@ -20,8 +20,8 @@ public class PlayerTankMovement : MonoBehaviour
     private CharacterController characterController;
     private Vector3 movementIput;
 
-    public float timeRunning = 0f;
-    public float currentSpeed;
+    private float timeRunning = 0f;
+    private float currentSpeed;
 
     private void Awake()
     {
