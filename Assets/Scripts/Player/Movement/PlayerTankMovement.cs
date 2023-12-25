@@ -7,57 +7,72 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerTankMovement : MonoBehaviour
 {
-    [Header("Forward speed setting")]
-    [SerializeField] private float playerSpeed;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float acceleration;
-    [SerializeField] private float timeToStartAccelerate;
+    [Header("Forward speed settings")]
+    [SerializeField] private float baseSpeed;
+    [SerializeField] private float maximumSpeed;
+    [SerializeField] private float accelerationRate;
+    [SerializeField] private float timeToStartAccelerating;
 
-    [Header("Rotation speed setting")]
-    [SerializeField] private float rotateSpeed;
-    [SerializeField][Range(0f, 1f)] private float rateOfRotationWhileWalking;
+    [Header("Rotation speed settings")]
+    [SerializeField] private float rotationSpeed;
+    [SerializeField][Range(0f, 1f)] private float walkingRotationRate;
+
+    public float accelerationTimer = 0f;
+    public float currentSpeed;
 
     private CharacterController characterController;
-    private Vector3 movementIput;
-
-    public float timeRunning = 0f;
-    public float currentSpeed;
+    private Vector3 movementInputVector;
+    private float deltaTime = 0f;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        currentSpeed = playerSpeed;
+    }
+
+    private void Start()
+    {
+        currentSpeed = baseSpeed;
     }
 
     private void Update()
     {
-        ModifyVelocity();
-        PlayerMovement();
+        deltaTime = Time.deltaTime * Time.timeScale;
+
+        ModifySpeed();
+        MovePlayer();
     }
 
-    private void ModifyVelocity()
+    private void ModifySpeed()
     {
 
-        if (movementIput.y > 0)
-        {
-            timeRunning = timeRunning >= timeToStartAccelerate ? timeToStartAccelerate : timeRunning + (Time.deltaTime * Time.timeScale);
-            if (timeRunning >= timeToStartAccelerate) currentSpeed = currentSpeed >= maxSpeed ? maxSpeed : currentSpeed + (acceleration * Time.deltaTime * Time.timeScale);
-        }
-        else
-        {
-            currentSpeed = playerSpeed;
-            timeRunning = timeRunning <= 0f ? 0f : (timeRunning - (Time.deltaTime * Time.timeScale * 1.5f)) * (1 + movementIput.y);
-        }
+        if (movementInputVector.y > 0) Accelerate();
+        else Decelerate();
     }
 
-    private void PlayerMovement()
+    private void Accelerate()
     {
-        characterController.Move(currentSpeed * movementIput.y * Time.deltaTime * transform.forward);
-        transform.Rotate(transform.up, movementIput.x * Time.deltaTime * (movementIput.y != 0f ? rotateSpeed * rateOfRotationWhileWalking : rotateSpeed));
+        accelerationTimer = accelerationTimer >= timeToStartAccelerating ? timeToStartAccelerating : accelerationTimer + deltaTime;
+        if (accelerationTimer >= timeToStartAccelerating) currentSpeed = currentSpeed >= maximumSpeed ? maximumSpeed : currentSpeed + (accelerationRate * deltaTime);
+    }
+
+    private void Decelerate()
+    {
+        currentSpeed = baseSpeed;
+        accelerationTimer = accelerationTimer <= 0f ? 0f : (accelerationTimer - (deltaTime * 1.5f)) * (1 + movementInputVector.y);
+    }
+
+    private void MovePlayer()
+    {
+        Vector3 movement = currentSpeed * movementInputVector.y * deltaTime * transform.forward;
+        characterController.Move(movement);
+
+        float rotation = movementInputVector.x * deltaTime * (movementInputVector.y != 0f ? rotationSpeed * walkingRotationRate : rotationSpeed);
+        transform.Rotate(transform.up, rotation);
     }
 
     private void OnMovement(InputValue value)
     {
-        movementIput = value.Get<Vector2>();
+        movementInputVector = value.Get<Vector2>();
+        movementInputVector.Normalize();
     }
 }
