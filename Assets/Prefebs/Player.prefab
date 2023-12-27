@@ -156,12 +156,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2bad68436e43840a0bbfc7dfa6f8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
-  maxSpeed: 10
-  acceleration: 2.5
-  timeToStartAccelerate: 2
-  rotateSpeed: 150
-  rateOfRotationWhileWalking: 0.65
+  baseSpeed: 5
+  maximumSpeed: 10
+  accelerationRate: 2.5
+  timeToStartAccelerating: 2
+  rotationSpeed: 180
+  walkingRotationRate: 0.65
 --- !u!114 &7172657222057306199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,11 +171,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 501818625353689048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b91fd44093ce2d640a80c5ba68d6c12e, type: 3}
+  m_Script: {fileID: 11500000, guid: cdadab1707fff5a4cbcb22144d133a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationDuration: 0.2
-  fastTurnCooldown: 0.2
+  rotationMovementDuration: 0.2
+  quickTurnCooldown: 0.5
 --- !u!1 &2374567015019330560
 GameObject:
   m_ObjectHideFlags: 0

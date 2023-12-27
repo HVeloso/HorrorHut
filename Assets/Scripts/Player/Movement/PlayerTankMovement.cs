@@ -17,8 +17,8 @@ public class PlayerTankMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField][Range(0f, 1f)] private float walkingRotationRate;
 
-    public float accelerationTimer = 0f;
-    public float currentSpeed;
+    private float accelerationTimer = 0f;
+    private float currentSpeed;
 
     private CharacterController characterController;
     private Vector3 movementInputVector;

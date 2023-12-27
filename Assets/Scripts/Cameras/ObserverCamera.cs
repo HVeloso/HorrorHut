@@ -14,7 +14,7 @@ public class ObserverCamera : MonoBehaviour
     [SerializeField] private bool followZAxis;
 
     [Header("Rotate Delay")]
-    [SerializeField] [Range(0f, 20f)] private float delayIntensity;
+    [SerializeField] [Range(0f, 20f)] private float rotateSpeed;
 
     [Header("Axis Rotation Limiter (World Rotation)")]
     [Header("Minimum Limit")]
@@ -30,39 +30,48 @@ public class ObserverCamera : MonoBehaviour
     #endregion
 
     private Transform playerTransform;
-    private Transform referenceTransform;
     private Vector3 newAngles;
-    private const float speed = 20f;
-    
+
+    private Vector3 directionToLook;
+    private Quaternion referenceQuaternion;
+
     private void Awake()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        referenceTransform = new GameObject("Reference").transform;
-        referenceTransform.SetParent(transform, false);
     }
 
     private void LateUpdate()
     {
-        referenceTransform.LookAt(playerTransform.position);
-
-        newAngles.x = followXAxis ? referenceTransform.eulerAngles.x : transform.eulerAngles.x;
-        newAngles.y = followYAxis ? referenceTransform.eulerAngles.y : transform.eulerAngles.y;
-        newAngles.z = followZAxis ? referenceTransform.eulerAngles.z : transform.eulerAngles.z;
-
-        if (minimumXLimit != 0 && maximumXLimit != 0)
-            newAngles.x = ClampRotation(newAngles.x, minimumXLimit, maximumXLimit);
-
-        if (minimumYLimit != 0 && maximumYLimit != 0)
-            newAngles.y = ClampRotation(newAngles.y, minimumYLimit, maximumYLimit);
-
-        if (minimumZLimit != 0 && maximumZLimit != 0)
-            newAngles.z = ClampRotation(newAngles.z, minimumZLimit, maximumZLimit);
-        
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(newAngles), Time.deltaTime * (speed - delayIntensity));
+        UpdateCameraRotation();
     }
 
-    private float ClampRotation(float value, float minimum, float maximum)
+    private void UpdateCameraRotation()
     {
+        directionToLook = playerTransform.position - transform.position;
+        referenceQuaternion = Quaternion.LookRotation(directionToLook);
+
+        newAngles.x = followXAxis ? referenceQuaternion.eulerAngles.x : transform.eulerAngles.x;
+        newAngles.y = followYAxis ? referenceQuaternion.eulerAngles.y : transform.eulerAngles.y;
+        newAngles.z = followZAxis ? referenceQuaternion.eulerAngles.z : transform.eulerAngles.z;
+
+        ClampRotationAngles();
+
+        float totalRotateSpeed = Time.deltaTime * Time.timeScale * rotateSpeed;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(newAngles), totalRotateSpeed);
+    }
+
+    private void ClampRotationAngles()
+    {
+        ClampAxisRotation(ref newAngles.x, minimumXLimit, maximumXLimit);
+        ClampAxisRotation(ref newAngles.y, minimumYLimit, maximumYLimit);
+        ClampAxisRotation(ref newAngles.z, minimumZLimit, maximumZLimit);
+    }
+
+    private float ClampAxisRotation(ref float currentAngle, float minimum, float maximum)
+    {
+        // Limita o ângulo atual entre os valores mínimo e máximo fornecidos.
+        // Caso o ângulo esteja fora dos limites, realiza ajustes para mantê-lo dentro do intervalo desejado.
+
         float centralOppositeValue;
 
         if (minimum < maximum)
@@ -70,18 +79,18 @@ public class ObserverCamera : MonoBehaviour
             centralOppositeValue = (minimum + maximum) / 2 + 180;
             if (centralOppositeValue > 360) centralOppositeValue -= 360;
 
-            if (value < minimum) value = minimum;
-            else if (value > maximum) value = maximum;
+            if (currentAngle < minimum) currentAngle = minimum;
+            else if (currentAngle > maximum) currentAngle = maximum;
         }
         else
         {
             centralOppositeValue = (minimum + maximum) / 2;
 
-            if (value < minimum && value > centralOppositeValue) value = minimum;
-            else if (value > maximum && value < centralOppositeValue) value = maximum;
+            if (currentAngle < minimum && currentAngle > centralOppositeValue) currentAngle = minimum;
+            else if (currentAngle > maximum && currentAngle < centralOppositeValue) currentAngle = maximum;
         }
 
-        return value;
+        return currentAngle;
     }
 
 #if UNITY_EDITOR

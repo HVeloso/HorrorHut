@@ -14,7 +14,7 @@ public class FollowerCamera : MonoBehaviour
     [SerializeField] private bool followZAxis;
 
     [Header("Motion Delay")]
-    [SerializeField] [Range(0f, 20f)] private float delayIntensity;
+    [SerializeField][Range(0f, 20f)] private float followSpeed;
 
     [Header("Axis Distance")]
     [SerializeField] private float distanceFromXAxis;
@@ -36,7 +36,6 @@ public class FollowerCamera : MonoBehaviour
 
     private Transform playerTransform;
     private Vector3 newPosition;
-    private const float speed = 20f;
 
     private void Awake()
     {
@@ -45,20 +44,40 @@ public class FollowerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        newPosition.x = followXAxis ? distanceFromXAxis + playerTransform.position.x : transform.position.x;
-        newPosition.y = followYAxis ? distanceFromYAxis + playerTransform.position.y : transform.position.y;
-        newPosition.z = followZAxis ? distanceFromZAxis + playerTransform.position.z : transform.position.z;
+        UpdateCameraPosition();
+    }
 
-        if (minimumXLimit != 0 && maximumXLimit != 0)
-            newPosition.x = Mathf.Clamp(newPosition.x, minimumXLimit, maximumXLimit);
+    private void UpdateCameraPosition()
+    {
+        UpdateNewPosition();
+        ClampPosition();
 
-        if (minimumYLimit != 0 && maximumYLimit != 0)
-            newPosition.y = Mathf.Clamp(newPosition.y, minimumYLimit, maximumYLimit);
+        float totalFollowSpeed = Time.deltaTime * Time.timeScale * followSpeed;
+        transform.position = Vector3.Lerp(transform.position, newPosition, totalFollowSpeed);
+    }
 
-        if (minimumZLimit != 0 && maximumZLimit != 0)
-            newPosition.z = Mathf.Clamp(newPosition.z, minimumZLimit, maximumZLimit);
+    private void UpdateNewPosition()
+    {
+        newPosition.x = ShouldFollowAxis(followXAxis, distanceFromXAxis, transform.position.x, playerTransform.position.x);
+        newPosition.y = ShouldFollowAxis(followYAxis, distanceFromYAxis, transform.position.y, playerTransform.position.y);
+        newPosition.z = ShouldFollowAxis(followZAxis, distanceFromZAxis, transform.position.z, playerTransform.position.z);
+    }
+    private float ShouldFollowAxis(bool shouldFollow, float distance, float currentPosition, float playerPosition)
+    {
+        return shouldFollow ? distance + playerPosition : currentPosition;
+    }
 
-        transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * (speed - delayIntensity));
+    private void ClampPosition()
+    {
+        ClampAxisPosition(ref newPosition.x, minimumXLimit, maximumXLimit);
+        ClampAxisPosition(ref newPosition.y, minimumYLimit, maximumYLimit);
+        ClampAxisPosition(ref newPosition.z, minimumZLimit, maximumZLimit);
+    }
+
+    private void ClampAxisPosition(ref float position, float minLimit, float maxLimit)
+    {
+        if (minLimit != maxLimit)
+            position = Mathf.Clamp(position, minLimit, maxLimit);
     }
 
 #if UNITY_EDITOR
