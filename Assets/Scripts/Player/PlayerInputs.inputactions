@@ -281,6 +281,17 @@
                 },
                 {
                     "name": "",
+                    "id": "85555f86-e913-439e-8699-05e5ec0acbba",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fde60894-2945-43a5-81e8-8b7357d90500",
                     "path": "<Keyboard>/q",
                     "interactions": "",

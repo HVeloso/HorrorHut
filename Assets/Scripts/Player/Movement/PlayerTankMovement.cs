@@ -21,7 +21,7 @@ public class PlayerTankMovement : MonoBehaviour
     private float currentSpeed;
 
     private CharacterController characterController;
-    private Vector3 movementInputVector;
+    private Vector2 movementInputVector;
     private float deltaTime = 0f;
 
     private void Awake()
@@ -44,7 +44,6 @@ public class PlayerTankMovement : MonoBehaviour
 
     private void ModifySpeed()
     {
-
         if (movementInputVector.y > 0) Accelerate();
         else Decelerate();
     }
