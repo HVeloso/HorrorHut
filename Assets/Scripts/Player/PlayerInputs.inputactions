@@ -10,12 +10,12 @@
                     "type": "Value",
                     "id": "e7f35810-c4a4-439b-89b1-8f5c7e016285",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FastTurn",
+                    "name": "Run",
                     "type": "Button",
                     "id": "e4c338cf-789e-44a5-a5e5-1c343035d25f",
                     "expectedControlType": "Button",
@@ -315,22 +315,22 @@
                 {
                     "name": "",
                     "id": "8e8fbadf-c659-4a3a-ab2b-c7196fcbb4d4",
-                    "path": "<Keyboard>/x",
+                    "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FastTurn",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "14dbbbc8-ddd5-46d3-a291-4eef9a9d97b2",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FastTurn",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

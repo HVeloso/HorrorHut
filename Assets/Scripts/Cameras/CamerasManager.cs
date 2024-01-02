@@ -7,8 +7,8 @@ using UnityEngine.Windows.WebCam;
 
 public static class CamerasManager
 {
+    private static PlayerMovement playerMovementScript;
     private static readonly List<GameObject> cameras = new();
-
     public static GameObject CurrentCamera { get; private set; }
 
     public static void GetNewCamera(GameObject newCam)
@@ -18,7 +18,7 @@ public static class CamerasManager
         CurrentCamera = newCam;
 
         if (cameras.Count > 1) cameras[1].SetActive(false);
-        CurrentCamera.SetActive(true);
+        ActiveCurrentCamera();
     }
 
     public static void RemoveCamera(GameObject camera)
@@ -28,9 +28,17 @@ public static class CamerasManager
             CurrentCamera = cameras[1];
 
             cameras[0].SetActive(false);
-            CurrentCamera.SetActive(true);
+            ActiveCurrentCamera();
         }
 
         cameras.Remove(camera);
+    }
+
+    private static void ActiveCurrentCamera()
+    {
+        if (playerMovementScript == null) playerMovementScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+
+        CurrentCamera.SetActive(true);
+        playerMovementScript.UpdateCameraReference(CurrentCamera.transform);
     }
 }

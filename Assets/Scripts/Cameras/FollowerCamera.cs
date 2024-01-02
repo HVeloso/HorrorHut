@@ -62,6 +62,7 @@ public class FollowerCamera : MonoBehaviour
         newPosition.y = ShouldFollowAxis(followYAxis, distanceFromYAxis, transform.position.y, playerTransform.position.y);
         newPosition.z = ShouldFollowAxis(followZAxis, distanceFromZAxis, transform.position.z, playerTransform.position.z);
     }
+
     private float ShouldFollowAxis(bool shouldFollow, float distance, float currentPosition, float playerPosition)
     {
         return shouldFollow ? distance + playerPosition : currentPosition;

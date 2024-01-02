@@ -40,6 +40,11 @@ public class ObserverCamera : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
+    private void OnEnable()
+    {
+
+    }
+
     private void LateUpdate()
     {
         UpdateCameraRotation();
@@ -50,14 +55,19 @@ public class ObserverCamera : MonoBehaviour
         directionToLook = playerTransform.position - transform.position;
         referenceQuaternion = Quaternion.LookRotation(directionToLook);
 
-        newAngles.x = followXAxis ? referenceQuaternion.eulerAngles.x : transform.eulerAngles.x;
-        newAngles.y = followYAxis ? referenceQuaternion.eulerAngles.y : transform.eulerAngles.y;
-        newAngles.z = followZAxis ? referenceQuaternion.eulerAngles.z : transform.eulerAngles.z;
+        newAngles.x = ShouldFollowAxis(followXAxis, referenceQuaternion.eulerAngles.x, transform.eulerAngles.x);
+        newAngles.y = ShouldFollowAxis(followYAxis, referenceQuaternion.eulerAngles.y, transform.eulerAngles.y);
+        newAngles.z = ShouldFollowAxis(followZAxis, referenceQuaternion.eulerAngles.z, transform.eulerAngles.z);
 
         ClampRotationAngles();
 
         float totalRotateSpeed = Time.deltaTime * Time.timeScale * rotateSpeed;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(newAngles), totalRotateSpeed);
+    }
+    
+    private float ShouldFollowAxis(bool shouldFollow, float referenceAxisValue, float currentRotation)
+    {
+        return shouldFollow ? referenceAxisValue : currentRotation;
     }
 
     private void ClampRotationAngles()
