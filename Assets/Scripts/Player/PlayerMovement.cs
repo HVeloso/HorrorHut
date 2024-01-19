@@ -12,7 +12,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Forward speed settings")]
     [SerializeField] private float walkingSpeed;
     [SerializeField] private float runningSpeed;
-    [SerializeField] private float gravityMultiplier = 3f;
+
+    // Move to Context
+    private float gravityMultiplier = 3f;
     private float currentSpeed;
     private float gravity = -9.81f;
     private float gravityVelocity;

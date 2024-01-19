@@ -4552,7 +4552,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkingSpeed: 5
   runningSpeed: 10
-  gravityMultiplier: 3
 --- !u!4 &2944058781741303665
 Transform:
   m_ObjectHideFlags: 0
@@ -5062,6 +5061,7 @@ GameObject:
   - component: {fileID: 9056062942046266966}
   - component: {fileID: 3104082228944184659}
   - component: {fileID: 2937635095696738649}
+  - component: {fileID: 9056062942046266967}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5239,6 +5239,30 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9056062942046266967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446961884756272466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20574411a4bcfb744ab947f02989f399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSpeed: 0
+  runningSpeed: 0
+  CurrentSpeed: 0
+  MoveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a302357a-f9c4-4311-82ea-b80f21ca611d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

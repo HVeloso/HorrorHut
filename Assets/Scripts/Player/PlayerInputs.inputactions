@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HoldBreath",
-                    "type": "Button",
-                    "id": "f095f496-37ba-4992-bf7f-6e81ae7fff60",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "OpenInventory",
                     "type": "Button",
                     "id": "d7df4aed-9e8b-4683-97b7-7fd7789f721b",
@@ -51,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
-                    "type": "Value",
-                    "id": "670f780f-2ab9-423b-9a48-9d6d3140245f",
-                    "expectedControlType": "Integer",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "ChangeWeapon",
                     "type": "Button",
                     "id": "b2550bbd-2781-4b2f-8e9b-9716aab2f513",
@@ -67,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Aiming",
+                    "type": "Value",
+                    "id": "5808b634-4ea4-442a-a0b0-29deef9d4d2a",
+                    "expectedControlType": "Analog",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -149,28 +140,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f7925074-1ee7-4491-b3c8-3cef79cc45b8",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HoldBreath",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "61419c17-23dc-42b3-a03e-18e97016c1a0",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HoldBreath",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "71f71bb9-c3a2-4fe1-98a6-a1aba88123c2",
                     "path": "<Keyboard>/t",
                     "interactions": "",
@@ -215,17 +184,6 @@
                 },
                 {
                     "name": "",
-                    "id": "33f986e0-f548-4da2-85ab-37e0848ca5cc",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8e8fbadf-c659-4a3a-ab2b-c7196fcbb4d4",
                     "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
@@ -243,6 +201,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6d7ec13-4997-442f-916c-2178a5a95aa1",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aiming",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
