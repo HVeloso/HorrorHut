@@ -7,5 +7,4 @@ public abstract class PlayerBaseState
     public abstract void EnterState(PlayerStateMachineContext context);
     public abstract void UpdateState(PlayerStateMachineContext context);
     public abstract void FixedUpdateState(PlayerStateMachineContext context);
-    protected abstract void SwitchState(PlayerStateMachineContext context);
 }

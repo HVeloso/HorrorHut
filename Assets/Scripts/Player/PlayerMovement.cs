@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         movimentionDirection = forwardRelativeToCamera + rightRelativeToCamera;
         movimentionDirection.Normalize();
     }
-
+    // ------------------------------------------------------------------------
     private void SyncPlayerMovementSettings()
     {
         if (newCameraReference != null && newCameraReference != currentCameraReference)
