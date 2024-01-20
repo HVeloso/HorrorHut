@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
-public class PlayerWalkingState : PlayerBaseState
+public class PlayerRunningState : PlayerBaseState
 {
     public override void ChangeSubState(PlayerBaseState newSubState) { }
 
     public override void EnterState(PlayerStateMachineContext context)
     {
-        Debug.Log("Entrou no estado andar");
-        context.CurrentSpeed = context.walkingSpeed;
+        Debug.Log("Entrou no estado correndo");
+        context.CurrentSpeed = context.runningSpeed;
     }
 
     public override void FixedUpdateState(PlayerStateMachineContext context) { }
@@ -20,7 +19,7 @@ public class PlayerWalkingState : PlayerBaseState
         if (context.RunAction.triggered)
         {
             PlayerMovingState movingState = context.CurrentState as PlayerMovingState;
-            context.CurrentState.ChangeSubState(movingState.runningState);
+            context.CurrentState.ChangeSubState(movingState.walkingState);
         }
     }
 }

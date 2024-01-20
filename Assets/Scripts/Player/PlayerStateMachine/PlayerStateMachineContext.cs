@@ -8,14 +8,15 @@ public class PlayerStateMachineContext : MonoBehaviour
 {
     #region Parameters
 
-    [Header("Forward speed settings")]
     public float walkingSpeed;
     public float runningSpeed;
 
     public float DeltaTime { get; private set; }
+    public float FixedDeltaTime { get; private set; }
 
-    [HideInInspector] public float CurrentSpeed;
+    public float CurrentSpeed;
     public InputAction MoveAction { get; private set; }
+    public InputAction RunAction { get; private set; }
 
     public float GravityMultiplier { get; private set; } = 3;
     public float Gravity { get; private set; } = -9.81f;
@@ -25,18 +26,19 @@ public class PlayerStateMachineContext : MonoBehaviour
     public Transform NewCameraReference { get; private set; }
     public Transform CurrentCameraReference { get; private set; }
 
+    public bool IsRunningButtonPressed { get; private set; } = false;
     public Vector2 MovementInputVector;
     public Vector3 ForwardRelativeToCamera;
     public Vector3 RightRelativeToCamera;
-    public Vector3 MovimentionDirection;
+    public Vector3 MovementDirection;
 
     #endregion
 
     #region States
 
-    private PlayerBaseState currentState;
+    public PlayerBaseState CurrentState { get; private set; }
     public PlayerIdleState idleState = new();
-    public PlayerWalkingState walkingState = new();
+    public PlayerMovingState movingState = new();
 
     #endregion
 
@@ -44,29 +46,33 @@ public class PlayerStateMachineContext : MonoBehaviour
     {
         CharacterController = GetComponent<CharacterController>();
         MoveAction = GetComponent<PlayerInput>().actions.FindAction("Movement");
+        RunAction = GetComponent<PlayerInput>().actions.FindAction("Run");
     }
 
     private void Start()
     {
         ChangeState(idleState);
-        StartCoroutine(GetFirstCameraReference());
+        StartCoroutine(WaitForCameraReference());
     }
 
     private void Update()
     {
         DeltaTime = Time.deltaTime * Time.timeScale;
-        currentState.UpdateState(this);
+        
+        CurrentState.UpdateState(this); 
     }
 
     private void FixedUpdate()
     {
-        currentState.FixedUpdateState(this);
+        FixedDeltaTime = Time.deltaTime * Time.timeScale;
+
+        CurrentState.FixedUpdateState(this);
     }
 
     public void ChangeState(PlayerBaseState newState)
     {
-        currentState = newState;
-        currentState.EnterState(this);
+        CurrentState = newState;
+        CurrentState.EnterState(this);
     }
 
     public void UpdateCameraReference(Transform cameraReference)
@@ -80,7 +86,7 @@ public class PlayerStateMachineContext : MonoBehaviour
             CurrentCameraReference = NewCameraReference;
     }
 
-    private IEnumerator GetFirstCameraReference()
+    private IEnumerator WaitForCameraReference()
     {
         yield return new WaitUntil(() => NewCameraReference != null);
         CurrentCameraReference = NewCameraReference;

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerBaseState
 {
+    public override void ChangeSubState(PlayerBaseState newSubState) { }
+
     public override void EnterState(PlayerStateMachineContext context)
     {
-        Debug.Log("Entoru no estado inérte");
+        Debug.Log("Entrou no estado inérte");
         context.UpdateCurrentCamera();
     }
 
@@ -15,7 +17,7 @@ public class PlayerIdleState : PlayerBaseState
     {
         if (context.MoveAction.ReadValue<Vector2>().magnitude > 0)
         {
-            context.ChangeState(context.walkingState);
+            context.ChangeState(context.movingState);
         }
     }
 }

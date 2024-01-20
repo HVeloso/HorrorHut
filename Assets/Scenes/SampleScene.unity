@@ -5047,6 +5047,7 @@ GameObject:
   - component: {fileID: 9056062942046266966}
   - component: {fileID: 3104082228944184659}
   - component: {fileID: 9056062942046266967}
+  - component: {fileID: 9056062942046266968}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5140,7 +5141,7 @@ Transform:
   m_GameObject: {fileID: 7446961884756272466}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0, y: 2.35, z: 0}
+  m_LocalPosition: {x: 0, y: 2.231339, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5243,7 +5244,21 @@ MonoBehaviour:
   MovementInputVector: {x: 0, y: 0}
   ForwardRelativeToCamera: {x: 0, y: 0, z: 0}
   RightRelativeToCamera: {x: 0, y: 0, z: 0}
-  MovimentionDirection: {x: 0, y: 0, z: 0}
+  MovementDirection: {x: 0, y: 0, z: 0}
+--- !u!114 &9056062942046266968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446961884756272466}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2bad68436e43840a0bbfc7dfa6f8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSpeed: 5
+  runningSpeed: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
