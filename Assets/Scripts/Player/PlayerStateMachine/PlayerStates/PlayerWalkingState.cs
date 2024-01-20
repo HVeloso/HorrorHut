@@ -51,10 +51,9 @@ public class PlayerWalkingState : PlayerBaseState
 
     private void ApplyMovement(PlayerStateMachineContext context)
     {
-        context.ForwardRelativeToCamera = context.CurrentCameraReference.forward;
-        context.ForwardRelativeToCamera *= context.MovementInputVector.y;
+        context.ForwardRelativeToCamera = context.CurrentCameraReference.forward * context.MovementInputVector.y;
+        context.RightRelativeToCamera = context.CurrentCameraReference.right * context.MovementInputVector.x;
 
-        context.ForwardRelativeToCamera = context.CurrentCameraReference.right * context.MovementInputVector.x;
         context.MovimentionDirection = context.ForwardRelativeToCamera + context.RightRelativeToCamera;
         context.MovimentionDirection.Normalize();
     }

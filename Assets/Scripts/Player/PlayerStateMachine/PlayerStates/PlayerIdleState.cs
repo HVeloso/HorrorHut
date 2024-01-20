@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerBaseState
 {
-    public override void EnterState(PlayerStateMachineContext context) { Debug.Log("Entoru no estado inérte"); }
+    public override void EnterState(PlayerStateMachineContext context)
+    {
+        Debug.Log("Entoru no estado inérte");
+        context.UpdateCurrentCamera();
+    }
 
     public override void FixedUpdateState(PlayerStateMachineContext context) { }
     public override void UpdateState(PlayerStateMachineContext context)

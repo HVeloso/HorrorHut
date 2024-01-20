@@ -49,6 +49,7 @@ public class PlayerStateMachineContext : MonoBehaviour
     private void Start()
     {
         ChangeState(idleState);
+        StartCoroutine(GetFirstCameraReference());
     }
 
     private void Update()
@@ -66,5 +67,22 @@ public class PlayerStateMachineContext : MonoBehaviour
     {
         currentState = newState;
         currentState.EnterState(this);
+    }
+
+    public void UpdateCameraReference(Transform cameraReference)
+    {
+        NewCameraReference = cameraReference;
+    }
+
+    public void UpdateCurrentCamera()
+    {
+        if (NewCameraReference != null && NewCameraReference != CurrentCameraReference)
+            CurrentCameraReference = NewCameraReference;
+    }
+
+    private IEnumerator GetFirstCameraReference()
+    {
+        yield return new WaitUntil(() => NewCameraReference != null);
+        CurrentCameraReference = NewCameraReference;
     }
 }
