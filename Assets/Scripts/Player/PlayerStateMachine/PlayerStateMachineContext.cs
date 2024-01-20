@@ -14,23 +14,23 @@ public class PlayerStateMachineContext : MonoBehaviour
     public float DeltaTime { get; private set; }
     public float FixedDeltaTime { get; private set; }
 
-    public float CurrentSpeed;
+    [HideInInspector] public float CurrentSpeed;
     public InputAction MoveAction { get; private set; }
     public InputAction RunAction { get; private set; }
 
     public float GravityMultiplier { get; private set; } = 3;
     public float Gravity { get; private set; } = -9.81f;
-    public float GravityVelocity;
+    [HideInInspector] public float GravityVelocity;
 
     public CharacterController CharacterController { get; private set; }
     public Transform NewCameraReference { get; private set; }
     public Transform CurrentCameraReference { get; private set; }
 
-    public bool IsRunningButtonPressed { get; private set; } = false;
-    public Vector2 MovementInputVector;
-    public Vector3 ForwardRelativeToCamera;
-    public Vector3 RightRelativeToCamera;
-    public Vector3 MovementDirection;
+    [HideInInspector] public bool IsRunningButtonPressed { get; private set; } = false;
+    [HideInInspector] public Vector2 MovementInputVector;
+    [HideInInspector] public Vector3 ForwardRelativeToCamera;
+    [HideInInspector] public Vector3 RightRelativeToCamera;
+    [HideInInspector] public Vector3 MovementDirection;
 
     #endregion
 
