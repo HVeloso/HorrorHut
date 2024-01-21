@@ -21,16 +21,16 @@ public class PlayerMovingState : PlayerBaseState
     {
         currentSubState.FixedUpdateState(context);
 
-        MovePlayer(context);
-    }
-
-    public override void UpdateState(PlayerStateMachineContext context)
-    {
         if (context.MovementInputVector.magnitude <= 0)
         {
             context.ChangeState(context.idleState);
         }
 
+        MovePlayer(context);
+    }
+
+    public override void UpdateState(PlayerStateMachineContext context)
+    {
         currentSubState.UpdateState(context);
     }
 
@@ -40,14 +40,17 @@ public class PlayerMovingState : PlayerBaseState
         currentSubState.EnterState(_context);
     }
 
+    #region Moving Methods
+
     private void MovePlayer(PlayerStateMachineContext context)
     {
         context.MovementInputVector = context.MoveAction.ReadValue<Vector2>();
 
         ApplyMovement(context);
+        ApplyRotationOnPlayerBody(context);
         ApplyGravity(context);
 
-        context.CharacterController.Move(context.FixedDeltaTime * context.MovementDirection);
+        context.CharacterController.Move(context.CurrentSpeed * context.FixedDeltaTime * context.MovementDirection);
     }
 
     private void ApplyGravity(PlayerStateMachineContext context)
@@ -73,6 +76,15 @@ public class PlayerMovingState : PlayerBaseState
 
         context.MovementDirection = context.ForwardRelativeToCamera + context.RightRelativeToCamera;
         context.MovementDirection.Normalize();
-        context.MovementDirection *= context.CurrentSpeed;
     }
+
+    private void ApplyRotationOnPlayerBody(PlayerStateMachineContext context)
+    {
+        Vector3 dir = context.MovementDirection;
+        dir.y = 0f;
+        if (dir.magnitude > 0f)
+            context.PlayerEntity.forward = Vector3.Slerp(context.PlayerEntity.forward, dir, context.FixedDeltaTime * context.RotationSpeed);
+    }
+
+    #endregion
 }

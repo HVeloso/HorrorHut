@@ -10,6 +10,7 @@ public class PlayerIdleState : PlayerBaseState
     {
         Debug.Log("Entrou no estado inérte");
         context.UpdateCurrentCamera();
+        context.PlayerAnimator.SetTrigger("Idle");
     }
 
     public override void FixedUpdateState(PlayerStateMachineContext context) { }

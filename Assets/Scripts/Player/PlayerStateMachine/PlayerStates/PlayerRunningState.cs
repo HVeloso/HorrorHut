@@ -9,7 +9,8 @@ public class PlayerRunningState : PlayerBaseState
     public override void EnterState(PlayerStateMachineContext context)
     {
         Debug.Log("Entrou no estado correndo");
-        context.CurrentSpeed = context.runningSpeed;
+        context.CurrentSpeed = context.RunningSpeed;
+        context.PlayerAnimator.SetTrigger("Run");
     }
 
     public override void FixedUpdateState(PlayerStateMachineContext context) { }

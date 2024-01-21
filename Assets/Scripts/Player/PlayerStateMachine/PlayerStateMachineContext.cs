@@ -8,12 +8,13 @@ public class PlayerStateMachineContext : MonoBehaviour
 {
     #region Parameters
 
-    public float walkingSpeed;
-    public float runningSpeed;
+    public float WalkingSpeed;
+    public float RunningSpeed;
+    public float RotationSpeed;
 
     public float DeltaTime { get; private set; }
     public float FixedDeltaTime { get; private set; }
-
+    
     [HideInInspector] public float CurrentSpeed;
     public InputAction MoveAction { get; private set; }
     public InputAction RunAction { get; private set; }
@@ -32,6 +33,9 @@ public class PlayerStateMachineContext : MonoBehaviour
     [HideInInspector] public Vector3 RightRelativeToCamera;
     [HideInInspector] public Vector3 MovementDirection;
 
+    public Transform PlayerEntity { get; private set; }
+    public Animator PlayerAnimator { get; private set; }
+
     #endregion
 
     #region States
@@ -44,9 +48,12 @@ public class PlayerStateMachineContext : MonoBehaviour
 
     private void Awake()
     {
-        CharacterController = GetComponent<CharacterController>();
         MoveAction = GetComponent<PlayerInput>().actions.FindAction("Movement");
         RunAction = GetComponent<PlayerInput>().actions.FindAction("Run");
+
+        CharacterController = GetComponent<CharacterController>();
+        PlayerEntity = transform.GetChild(0);
+        PlayerAnimator = PlayerEntity.GetComponent<Animator>();
     }
 
     private void Start()

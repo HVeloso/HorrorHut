@@ -10,7 +10,8 @@ public class PlayerWalkingState : PlayerBaseState
     public override void EnterState(PlayerStateMachineContext context)
     {
         Debug.Log("Entrou no estado andar");
-        context.CurrentSpeed = context.walkingSpeed;
+        context.CurrentSpeed = context.WalkingSpeed;
+        context.PlayerAnimator.SetTrigger("Walk");
     }
 
     public override void FixedUpdateState(PlayerStateMachineContext context) { }
