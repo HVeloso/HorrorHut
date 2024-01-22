@@ -38,10 +38,8 @@ public static class CamerasManager
     private static void ActiveCurrentCamera()
     {
         playerStatesManager ??= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachineContext>();
-        playerMovement ??= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 
         CurrentCamera.SetActive(true);
         playerStatesManager.UpdateCameraReference(CurrentCamera.transform);
-        playerMovement.UpdateCameraReference(CurrentCamera.transform);
     }
 }

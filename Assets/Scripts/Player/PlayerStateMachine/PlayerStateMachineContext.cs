@@ -34,13 +34,12 @@ public class PlayerStateMachineContext : MonoBehaviour
     [HideInInspector] public Vector3 MovementDirection;
 
     public Transform PlayerEntity { get; private set; }
-    public Animator PlayerAnimator { get; private set; }
 
     #endregion
 
     #region States
 
-    public PlayerBaseState CurrentState { get; private set; }
+    public PlayerBaseSuperState CurrentState { get; private set; }
     public PlayerIdleState idleState = new();
     public PlayerMovingState movingState = new();
 
@@ -48,25 +47,25 @@ public class PlayerStateMachineContext : MonoBehaviour
 
     private void Awake()
     {
+        StartCoroutine(WaitForCameraReference());
+
         MoveAction = GetComponent<PlayerInput>().actions.FindAction("Movement");
         RunAction = GetComponent<PlayerInput>().actions.FindAction("Run");
 
         CharacterController = GetComponent<CharacterController>();
         PlayerEntity = transform.GetChild(0);
-        PlayerAnimator = PlayerEntity.GetComponent<Animator>();
     }
 
     private void Start()
     {
         ChangeState(idleState);
-        StartCoroutine(WaitForCameraReference());
     }
 
     private void Update()
     {
         DeltaTime = Time.deltaTime * Time.timeScale;
         
-        CurrentState.UpdateState(this); 
+        CurrentState.UpdateState(this);
     }
 
     private void FixedUpdate()
@@ -76,7 +75,7 @@ public class PlayerStateMachineContext : MonoBehaviour
         CurrentState.FixedUpdateState(this);
     }
 
-    public void ChangeState(PlayerBaseState newState)
+    public void ChangeState(PlayerBaseSuperState newState)
     {
         CurrentState = newState;
         CurrentState.EnterState(this);

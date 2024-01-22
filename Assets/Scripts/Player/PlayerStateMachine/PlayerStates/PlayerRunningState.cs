@@ -2,25 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRunningState : PlayerBaseState
+public class PlayerRunningState : PlayerBaseSubState
 {
-    public override void ChangeSubState(PlayerBaseState newSubState) { }
-
-    public override void EnterState(PlayerStateMachineContext context)
+    public override void EnterSubState(PlayerStateMachineContext context, PlayerBaseSuperState superState)
     {
-        Debug.Log("Entrou no estado correndo");
         context.CurrentSpeed = context.RunningSpeed;
-        context.PlayerAnimator.SetTrigger("Run");
     }
 
-    public override void FixedUpdateState(PlayerStateMachineContext context) { }
+    public override void FixedUpdateSubState(PlayerStateMachineContext context, PlayerBaseSuperState superState) { }
 
-    public override void UpdateState(PlayerStateMachineContext context)
+    public override void UpdateSubState(PlayerStateMachineContext context, PlayerBaseSuperState superState)
     {
         if (context.RunAction.triggered)
         {
-            PlayerMovingState movingState = context.CurrentState as PlayerMovingState;
-            context.CurrentState.ChangeSubState(movingState.walkingState);
+            PlayerMovingState movingState = superState as PlayerMovingState;
+            movingState.ChangeSubState(context, movingState.walkingState);
         }
     }
 }

@@ -2,24 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovingState : PlayerBaseState
+public class PlayerMovingState : PlayerBaseSuperState
 {
-    private PlayerBaseState currentSubState;
     public PlayerWalkingState walkingState = new();
     public PlayerRunningState runningState = new();
 
-    private PlayerStateMachineContext _context;
-
     public override void EnterState(PlayerStateMachineContext context)
     {
-        _context = context;
-        ChangeSubState(walkingState);
-        Debug.Log("Entrou no estado de movimento");
+        ChangeSubState(context, walkingState);
     }
 
     public override void FixedUpdateState(PlayerStateMachineContext context)
     {
-        currentSubState.FixedUpdateState(context);
+        CurrentSubState.FixedUpdateSubState(context, this);
 
         if (context.MovementInputVector.magnitude <= 0)
         {
@@ -31,13 +26,13 @@ public class PlayerMovingState : PlayerBaseState
 
     public override void UpdateState(PlayerStateMachineContext context)
     {
-        currentSubState.UpdateState(context);
+        CurrentSubState.UpdateSubState(context, this);
     }
 
-    public override void ChangeSubState(PlayerBaseState newSubState)
+    public override void ChangeSubState(PlayerStateMachineContext context, PlayerBaseSubState newSubState)
     {
-        currentSubState = newSubState;
-        currentSubState.EnterState(_context);
+        CurrentSubState = newSubState;
+        CurrentSubState.EnterSubState(context, this);
     }
 
     #region Moving Methods
@@ -47,7 +42,7 @@ public class PlayerMovingState : PlayerBaseState
         context.MovementInputVector = context.MoveAction.ReadValue<Vector2>();
 
         ApplyMovement(context);
-        ApplyRotationOnPlayerBody(context);
+        ApplyRotationOnPlayerEntity(context);
         ApplyGravity(context);
 
         context.CharacterController.Move(context.CurrentSpeed * context.FixedDeltaTime * context.MovementDirection);
@@ -61,8 +56,6 @@ public class PlayerMovingState : PlayerBaseState
         }
         else
         {
-            Debug.Log("Movendo");
-
             context.GravityVelocity += context.Gravity * context.GravityMultiplier;
         }
 
@@ -78,7 +71,7 @@ public class PlayerMovingState : PlayerBaseState
         context.MovementDirection.Normalize();
     }
 
-    private void ApplyRotationOnPlayerBody(PlayerStateMachineContext context)
+    private void ApplyRotationOnPlayerEntity(PlayerStateMachineContext context)
     {
         Vector3 dir = context.MovementDirection;
         dir.y = 0f;

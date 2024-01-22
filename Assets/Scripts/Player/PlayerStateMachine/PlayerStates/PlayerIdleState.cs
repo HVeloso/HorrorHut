@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerBaseState
+public class PlayerIdleState : PlayerBaseSuperState
 {
-    public override void ChangeSubState(PlayerBaseState newSubState) { }
+    public override void ChangeSubState(PlayerStateMachineContext context, PlayerBaseSubState newSubState) { }
 
     public override void EnterState(PlayerStateMachineContext context)
     {
-        Debug.Log("Entrou no estado inérte");
         context.UpdateCurrentCamera();
-        context.PlayerAnimator.SetTrigger("Idle");
     }
 
     public override void FixedUpdateState(PlayerStateMachineContext context) { }
