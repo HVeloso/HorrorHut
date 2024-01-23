@@ -7,7 +7,10 @@ public class PlayerWalkingState : PlayerBaseSubState
     public override void EnterSubState(PlayerStateMachineContext context, PlayerBaseSuperState superState)
     {
         context.CurrentSpeed = context.WalkingSpeed;
+        context.animator.SetTrigger("WALK");
     }
+
+    public override void ExitSubState(PlayerStateMachineContext context, PlayerBaseSuperState superState) { }
 
     public override void FixedUpdateSubState(PlayerStateMachineContext context, PlayerBaseSuperState superState) { }
 

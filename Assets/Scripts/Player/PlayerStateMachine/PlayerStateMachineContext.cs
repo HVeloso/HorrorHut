@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerStateMachineContext : MonoBehaviour
@@ -33,7 +34,7 @@ public class PlayerStateMachineContext : MonoBehaviour
     [HideInInspector] public Vector3 RightRelativeToCamera;
     [HideInInspector] public Vector3 MovementDirection;
 
-    public Transform PlayerEntity { get; private set; }
+    public Animator animator { get; private set; }
 
     #endregion
 
@@ -53,7 +54,7 @@ public class PlayerStateMachineContext : MonoBehaviour
         RunAction = GetComponent<PlayerInput>().actions.FindAction("Run");
 
         CharacterController = GetComponent<CharacterController>();
-        PlayerEntity = transform.GetChild(0);
+        animator = transform.GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -77,6 +78,7 @@ public class PlayerStateMachineContext : MonoBehaviour
 
     public void ChangeState(PlayerBaseSuperState newState)
     {
+        CurrentState?.ExitState(this);
         CurrentState = newState;
         CurrentState.EnterState(this);
     }

@@ -12,16 +12,17 @@ public class PlayerMovingState : PlayerBaseSuperState
         ChangeSubState(context, walkingState);
     }
 
+    public override void ExitState(PlayerStateMachineContext context) { }
+
     public override void FixedUpdateState(PlayerStateMachineContext context)
     {
         CurrentSubState.FixedUpdateSubState(context, this);
+        MovePlayer(context);
 
         if (context.MovementInputVector.magnitude <= 0)
         {
             context.ChangeState(context.idleState);
         }
-
-        MovePlayer(context);
     }
 
     public override void UpdateState(PlayerStateMachineContext context)
@@ -31,6 +32,7 @@ public class PlayerMovingState : PlayerBaseSuperState
 
     public override void ChangeSubState(PlayerStateMachineContext context, PlayerBaseSubState newSubState)
     {
+        CurrentSubState?.ExitSubState(context, this);
         CurrentSubState = newSubState;
         CurrentSubState.EnterSubState(context, this);
     }
@@ -42,7 +44,7 @@ public class PlayerMovingState : PlayerBaseSuperState
         context.MovementInputVector = context.MoveAction.ReadValue<Vector2>();
 
         ApplyMovement(context);
-        ApplyRotationOnPlayerEntity(context);
+        ApplyRotation(context);
         ApplyGravity(context);
 
         context.CharacterController.Move(context.CurrentSpeed * context.FixedDeltaTime * context.MovementDirection);
@@ -71,12 +73,13 @@ public class PlayerMovingState : PlayerBaseSuperState
         context.MovementDirection.Normalize();
     }
 
-    private void ApplyRotationOnPlayerEntity(PlayerStateMachineContext context)
+    private void ApplyRotation(PlayerStateMachineContext context)
     {
-        Vector3 dir = context.MovementDirection;
-        dir.y = 0f;
-        if (dir.magnitude > 0f)
-            context.PlayerEntity.forward = Vector3.Slerp(context.PlayerEntity.forward, dir, context.FixedDeltaTime * context.RotationSpeed);
+        Vector3 directionToLook = context.MovementDirection;
+        directionToLook.y = 0f;
+        
+        if (directionToLook.magnitude > 0f)
+            context.transform.forward = Vector3.Slerp(context.transform.forward, directionToLook, context.FixedDeltaTime * context.RotationSpeed);
     }
 
     #endregion

@@ -7,6 +7,7 @@ public abstract class PlayerBaseSuperState
     public PlayerBaseSubState CurrentSubState { get; protected set; }
 
     public abstract void EnterState(PlayerStateMachineContext context);
+    public abstract void ExitState(PlayerStateMachineContext context);
     public abstract void UpdateState(PlayerStateMachineContext context);
     public abstract void FixedUpdateState(PlayerStateMachineContext context);
     public abstract void ChangeSubState(PlayerStateMachineContext context, PlayerBaseSubState newSubState);

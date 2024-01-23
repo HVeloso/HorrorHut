@@ -9,7 +9,10 @@ public class PlayerIdleState : PlayerBaseSuperState
     public override void EnterState(PlayerStateMachineContext context)
     {
         context.UpdateCurrentCamera();
+        context.animator.SetTrigger("IDLE");
     }
+
+    public override void ExitState(PlayerStateMachineContext context) { }
 
     public override void FixedUpdateState(PlayerStateMachineContext context) { }
     public override void UpdateState(PlayerStateMachineContext context)

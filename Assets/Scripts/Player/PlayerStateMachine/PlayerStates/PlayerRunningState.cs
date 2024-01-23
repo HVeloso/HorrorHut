@@ -7,7 +7,10 @@ public class PlayerRunningState : PlayerBaseSubState
     public override void EnterSubState(PlayerStateMachineContext context, PlayerBaseSuperState superState)
     {
         context.CurrentSpeed = context.RunningSpeed;
+        context.animator.SetTrigger("RUN");
     }
+
+    public override void ExitSubState(PlayerStateMachineContext context, PlayerBaseSuperState superState) { }
 
     public override void FixedUpdateSubState(PlayerStateMachineContext context, PlayerBaseSuperState superState) { }
 
