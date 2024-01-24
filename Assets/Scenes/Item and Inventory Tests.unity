@@ -2519,6 +2519,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Area
       objectReference: {fileID: 0}
+    - target: {fileID: 5799225889143410188, guid: e84cff83ddc9eb74ea97fda0463b970f, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799225889143410188, guid: e84cff83ddc9eb74ea97fda0463b970f, type: 3}
+      propertyPath: m_RenderingPath
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6100240207236036559, guid: e84cff83ddc9eb74ea97fda0463b970f, type: 3}
       propertyPath: m_LocalScale.x
       value: 25
@@ -2573,7 +2581,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7933990675533762938, guid: e84cff83ddc9eb74ea97fda0463b970f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7933990675533762938, guid: e84cff83ddc9eb74ea97fda0463b970f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10685,7 +10697,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5146741608609625308, guid: a465e5e8825ac8146b12daada2c0fdbe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -9.11
       objectReference: {fileID: 0}
     - target: {fileID: 5146741608609625308, guid: a465e5e8825ac8146b12daada2c0fdbe, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10693,7 +10705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5146741608609625308, guid: a465e5e8825ac8146b12daada2c0fdbe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.244
+      value: -24.82
       objectReference: {fileID: 0}
     - target: {fileID: 5146741608609625308, guid: a465e5e8825ac8146b12daada2c0fdbe, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11021,12 +11033,12 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 3445352998621064742}
+  - {fileID: 8354078394024746027}
+  - {fileID: 8221469821479456088}
+  - {fileID: 7123868460402287312}
+  - {fileID: 8627615858229372128}
   - {fileID: 1944562775}
   - {fileID: 1700699955}
   - {fileID: 699203641}
-  - {fileID: 8627615858229372128}
-  - {fileID: 7123868460402287312}
-  - {fileID: 8221469821479456088}
-  - {fileID: 8354078394024746027}
   - {fileID: 3137449287058194163}
-  - {fileID: 3445352998621064742}
