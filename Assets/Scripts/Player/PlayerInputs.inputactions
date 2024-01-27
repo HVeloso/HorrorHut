@@ -24,18 +24,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "OpenInventory",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "d7df4aed-9e8b-4683-97b7-7fd7789f721b",
+                    "id": "602c9f14-d5e0-4804-9508-c3df6d4e0431",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "OpenInventory",
                     "type": "Button",
-                    "id": "602c9f14-d5e0-4804-9508-c3df6d4e0431",
+                    "id": "d7df4aed-9e8b-4683-97b7-7fd7789f721b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -129,45 +129,12 @@
                 },
                 {
                     "name": "",
-                    "id": "e0a7b4b1-b843-4120-9700-7503b3056202",
-                    "path": "<Gamepad>/dpad",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "71f71bb9-c3a2-4fe1-98a6-a1aba88123c2",
                     "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "OpenInventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1dd27892-b32b-4722-b257-3139b4319451",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "85555f86-e913-439e-8699-05e5ec0acbba",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -212,6 +179,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Aiming",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1dd27892-b32b-4722-b257-3139b4319451",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85555f86-e913-439e-8699-05e5ec0acbba",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -8,9 +8,10 @@ using UnityEngine.Windows.WebCam;
 public static class CamerasManager
 {
     private static PlayerStateMachineContext playerStatesManager;
-    private static PlayerMovement playerMovement;
     private static readonly List<GameObject> cameras = new();
     public static GameObject CurrentCamera { get; private set; }
+
+
 
     public static void GetNewCamera(GameObject newCam)
     {
@@ -18,7 +19,9 @@ public static class CamerasManager
 
         CurrentCamera = newCam;
 
-        if (cameras.Count > 1) cameras[1].SetActive(false);
+        if (cameras.Count > 1)
+            cameras[1].SetActive(false);
+
         ActiveCurrentCamera();
     }
 
@@ -41,5 +44,6 @@ public static class CamerasManager
 
         CurrentCamera.SetActive(true);
         playerStatesManager.UpdateCameraReference(CurrentCamera.transform);
+        UIObjectIconController.UpdateUIObjectIconCameraReference(CurrentCamera);
     }
 }
