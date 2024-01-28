@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Windows.WebCam;
 
 public static class CamerasManager
 {
@@ -44,6 +40,6 @@ public static class CamerasManager
 
         CurrentCamera.SetActive(true);
         playerStatesManager.UpdateCameraReference(CurrentCamera.transform);
-        UIObjectIconController.UpdateUIObjectIconCameraReference(CurrentCamera);
+        UIObjectIconController.UpdateUIObjectIconCameraReference();
     }
 }

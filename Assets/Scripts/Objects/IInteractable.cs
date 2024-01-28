@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public UIObjectIconController UIObjectIconController { get; set; }
+    public UIObjectIconController[] UIObjectIconController { get; set; }
 
     public void Interact();
 }

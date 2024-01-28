@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent (typeof(Image))]
 public class UIObjectIconController : MonoBehaviour
 {
     [Header("Parameters")]
@@ -12,11 +12,10 @@ public class UIObjectIconController : MonoBehaviour
     private Transform target;
     private Image currentImage;
 
-    private static Camera currentCamera;
     private static Canvas objectIconCanvas;
 
     public delegate void OnCurrentCameraActivated();
-    public static event OnCurrentCameraActivated currentCameraActivated;
+    public static event OnCurrentCameraActivated CurrentCameraActivated;
 
     private void Awake()
     {
@@ -26,25 +25,24 @@ public class UIObjectIconController : MonoBehaviour
 
     private void OnEnable()
     {
-        currentCameraActivated += UpdateImagePositionAndRotation;
+        CurrentCameraActivated += UpdateImagePositionAndRotation;
     }
 
     private void OnDisable()
     {
-        currentCameraActivated -= UpdateImagePositionAndRotation;
+        CurrentCameraActivated -= UpdateImagePositionAndRotation;
     }
 
-    public static void UpdateUIObjectIconCameraReference(GameObject newCamera)
+    public static void UpdateUIObjectIconCameraReference()
     {
-        currentCamera = newCamera.GetComponent<Camera>();
-        objectIconCanvas.worldCamera = currentCamera;
-
-        currentCameraActivated?.Invoke();
+        objectIconCanvas.worldCamera = CamerasManager.CurrentCamera.GetComponent<Camera>();
+        CurrentCameraActivated?.Invoke();
     }
 
     public void SetTargetObject(Transform targetObject)
     {
         target = targetObject;
+        UpdateImagePositionAndRotation();
     }
 
     public void SetImageAsDetected(Transform playerPosition, float maxDistante)
@@ -64,12 +62,13 @@ public class UIObjectIconController : MonoBehaviour
 
     private void UpdateImagePositionAndRotation()
     {
-        if (currentCamera == null) return;
+        if (CamerasManager.CurrentCamera == null) return;
+        if (target == null) return;
 
         Vector3 pos = target.position + offset;
         transform.position = pos;
 
-        transform.LookAt(currentCamera.transform);
+        transform.LookAt(CamerasManager.CurrentCamera.transform);
     }
 
     private IEnumerator WaitForExitDetectionZone(Transform playerPosition, float maxDistante)

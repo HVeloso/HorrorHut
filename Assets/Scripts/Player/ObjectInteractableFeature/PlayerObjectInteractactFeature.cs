@@ -1,15 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Progress;
-using static UnityEngine.GraphicsBuffer;
 
 public class PlayerObjectInteractactFeature : MonoBehaviour
 {
@@ -47,6 +39,8 @@ public class PlayerObjectInteractactFeature : MonoBehaviour
         {
             if (IsObjectInInteractionAngle(objectInRange.transform.position) && !VerifyWallObstruction(objectInRange.transform.position))
             {
+                if (!objectInRange.TryGetComponent<IInteractable>(out _)) continue;
+
                 objectsOnInteractionArea.Add(objectInRange.gameObject);
             }
         }
@@ -54,7 +48,12 @@ public class PlayerObjectInteractactFeature : MonoBehaviour
         if (objectsOnInteractionArea.Count <= 0) return null;
 
         objectsOnInteractionArea = objectsOnInteractionArea.OrderBy(item => Vector3.Distance(item.transform.position, transform.position)).ToList();
-        objectsOnInteractionArea[0].GetComponent<IInteractable>().UIObjectIconController.SetImageAsNearest(transform, detectRadius);
+
+        foreach (var icon in objectsOnInteractionArea[0].GetComponent<IInteractable>().UIObjectIconController)
+        {
+            icon.SetImageAsNearest(transform, detectRadius);
+
+        }
 
         return objectsOnInteractionArea[0];
     }
@@ -78,9 +77,11 @@ public class PlayerObjectInteractactFeature : MonoBehaviour
 
             if (!VerifyWallObstruction(itemTransform.position))
             {
-                IInteractable itemIInteractable = itemTransform.GetComponent<IInteractable>();
-
-                itemIInteractable.UIObjectIconController.SetImageAsDetected(transform, detectRadius);
+                if (itemTransform.TryGetComponent<IInteractable>(out IInteractable itemIInteractable))
+                {
+                    foreach (var icon in itemIInteractable.UIObjectIconController)
+                        icon.SetImageAsDetected(transform, detectRadius);
+                }
             }
         }
     }
@@ -114,7 +115,7 @@ public class PlayerObjectInteractactFeature : MonoBehaviour
         {
             currentAngle -= 5f * Mathf.Deg2Rad;
             if (currentAngle < endAngle) currentAngle = endAngle;
-            
+
             float targetX = transform.position.x + interactRadius * Mathf.Cos(currentAngle);
             float targetZ = transform.position.z + interactRadius * Mathf.Sin(currentAngle);
 

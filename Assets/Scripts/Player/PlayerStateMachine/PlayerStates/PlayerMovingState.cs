@@ -58,7 +58,7 @@ public class PlayerMovingState : PlayerBaseSuperState
         }
         else
         {
-            context.GravityVelocity += context.Gravity * context.GravityMultiplier;
+            context.GravityVelocity += context.Gravity * context.GravityMultiplier * context.FixedDeltaTime;
         }
 
         context.MovementDirection.y = context.GravityVelocity;

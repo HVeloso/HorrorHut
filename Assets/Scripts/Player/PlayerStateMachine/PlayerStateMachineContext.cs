@@ -22,13 +22,12 @@ public class PlayerStateMachineContext : MonoBehaviour
 
     public float GravityMultiplier { get; private set; } = 3;
     public float Gravity { get; private set; } = -9.81f;
-    [HideInInspector] public float GravityVelocity;
+    public float GravityVelocity;
 
     public CharacterController CharacterController { get; private set; }
     public Transform NewCameraReference { get; private set; }
     public Transform CurrentCameraReference { get; private set; }
 
-    [HideInInspector] public bool IsRunningButtonPressed { get; private set; } = false;
     [HideInInspector] public Vector2 MovementInputVector;
     [HideInInspector] public Vector3 ForwardRelativeToCamera;
     [HideInInspector] public Vector3 RightRelativeToCamera;
