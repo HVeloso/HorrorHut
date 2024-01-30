@@ -1,13 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Collider))]
-public class AnimatedInteractionObjectBehaviour : MonoBehaviour, IInteractable
+public class ObjectOfPhysicalInteractionWithThePlayer : MonoBehaviour, IInteractable
 {
     [Header("Parameters")]
-    [SerializeField]
-        private bool canInteractMoreThatOnce;
     [SerializeField] [Min(0f)]
         private float intervalBetweenInteractions = 0f;
 
@@ -20,13 +17,10 @@ public class AnimatedInteractionObjectBehaviour : MonoBehaviour, IInteractable
         set { uIObjectIconController = value; }
     }
 
-    private bool canInteract = true;
-    private Animator objectAnimator;
+    public delegate void OnInteractHandler();
+    public event OnInteractHandler OnInteracted;
 
-    private void Awake()
-    {
-        objectAnimator = GetComponent<Animator>();
-    }
+    private bool canInteract = true;
 
     private void OnEnable()
     {
@@ -39,19 +33,8 @@ public class AnimatedInteractionObjectBehaviour : MonoBehaviour, IInteractable
         if (!canInteract) return;
 
         StartCoroutine(InteractionCooldown());
-        RunObjectAnimation();
-    }
 
-    private void RunObjectAnimation()
-    {
-        if (!canInteractMoreThatOnce)
-        {
-            gameObject.layer = LayerMask.GetMask("Default");
-            foreach (var icon in uIObjectIconController)
-                Destroy(icon.gameObject);
-        }
-
-        objectAnimator.SetTrigger("RunAnimation");
+        OnInteracted?.Invoke();
     }
 
     private IEnumerator InteractionCooldown()

@@ -7,6 +7,7 @@ TagManager:
   - Camera Area
   - Interactable Item
   - Object Icon UI
+  - Nav
   layers:
   - Default
   - TransparentFX
